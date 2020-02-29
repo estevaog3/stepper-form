@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+:root{
+  font-size: 16px;
+  --green-primary: #41d873;
+  --blue-primary: #0984e3;
+  --gray-primary: #b2bec3;
+  font-family: 'Open Sans', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.stepper-form{
+  max-width: 400px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  box-shadow: 0px 0px 2rem var(--gray-primary);
+  border-radius: 1.5rem;
+  padding: .8rem;
+  counter-reset: step-counter;
+  box-sizing: content-box;
+}
+
+.stepper-form__counter--submited{
+  background-color: var(--green-primary);
+  animation-duration: 3s;
+  animation-name: form-submited;
+}
+
+.stepper-form__step{
+  width: 80%;
+  height: 0px;
+  visibility: hidden;
+  opacity: 0;
+  --duration: .3s;
+  transition: height var(--duration) ease,
+  opacity var(--duration) ease,
+  visibility 0s var(--duration);
+  position: relative;
+}
+
+.stepper-form__step > :not(:first-child){
+  margin-top: 5px;
+}
+
+.stepper-form__step > * {
+  width: 100%;
+}
+
+.stepper-form__step > input{
+  padding: .3em .4rem;
+  border-radius: 0;
+  border: solid 2px var(--gray-primary);
+  border-radius: 5px;
+}
+.stepper-form__step > input:invalid{
+  box-shadow: none;
+  outline: none;
+}
+
+.stepper-form__step > input:valid{
+  border: solid 2px var(--green-primary);
+}
+
+.stepper-form__step--current{
+  height: 100px;
+  visibility: visible;
+  opacity: 1;
+  transition: height var(--duration) ease,
+  opacity var(--duration) ease;
+}
+
+.stepper-form__step::before{
+  counter-increment: step-counter;
+  content: counter(step-counter);
+  position: absolute;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  background-color: var(--blue-primary);
+  color: white;
+  top: 50%;
+  left: 0;
+  transform: translate(-200%, -50%);
+  --duration: .5s;
+  transition: all var(--duration) ease;
+}
+
+.stepper-form--submited > .stepper-form__step::before{
+  content: '\2713';
+  background-color: var(--green-primary);
+}
+
+.step-button{
+  text-transform: uppercase;
+  color: white;
+  background-color: var(--blue-primary);
+  padding: .3em;
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
+}
+
+.step-button--bg-white{
+  background-color: white;
+  color: black;
+}
